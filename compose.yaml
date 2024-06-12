@@ -1,28 +1,39 @@
+version: '3'
+
 services:
-  mongodb:
-    image: 'mongo:latest'
-    environment:
-      - 'MONGO_INITDB_DATABASE=mydatabase'
-      - 'MONGO_INITDB_ROOT_PASSWORD=secret'
-      - 'MONGO_INITDB_ROOT_USERNAME=root'
-    ports:
-      - '27017'
   postgres:
-    image: 'postgres:latest'
+    image: postgres:latest
+    container_name: postgres
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: frogs_postgres
     ports:
-      - '5432'
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  mongodb:
+    image: mongo:latest
+    container_name: frogs_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
   rabbitmq:
-    image: 'rabbitmq:latest'
-    environment:
-      - 'RABBITMQ_DEFAULT_PASS=secret'
-      - 'RABBITMQ_DEFAULT_USER=myuser'
+    image: rabbitmq:management
+    container_name: rabbitmq
     ports:
-      - '5672'
+      - "5672:5672"
+      - "15672:15672"
+
   redis:
-    image: 'redis:latest'
+    image: redis:latest
+    container_name: redis
     ports:
-      - '6379'
+      - "6379:6379"
+
+volumes:
+  postgres-data:
+  mongo-data:
