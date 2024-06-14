@@ -19,6 +19,12 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @GetMapping("/hello")
+    public String sayHello() {
+        System.out.println("Wait...");
+        return "Hello world";
+    }
+
     @GetMapping
     public List<Product> listAll() {
         return productService.listAll();

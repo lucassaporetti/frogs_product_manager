@@ -4,7 +4,6 @@ import com.portfolio.frogs_product_manager.dto.ProductDto;
 import com.portfolio.frogs_product_manager.model.Product;
 import com.portfolio.frogs_product_manager.repository.ProductRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
